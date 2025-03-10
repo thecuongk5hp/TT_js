@@ -50,53 +50,54 @@ public class Tt2 {
                     }
                     System.out.println("Số phần tử chia hết cho 2 và 3: " + count);
                     break;
-
-                case 4:
+   case 4:
                     int sum = 0;
-                    System.out.println("Các phần tử biên, chéo chính và chéo phụ:");
-
+                    System.out.println("Phần tử trên biên, đường chéo chính, đường chéo phụ:");
                     for (int i = 0; i < n; i++) {
                         for (int j = 0; j < m; j++) {
                             if (i == 0 || i == n - 1 || j == 0 || j == m - 1 || i == j || i + j == m - 1) {
-
-                                System.out.print(arr[i][j] + " ");
-                                sum += arr[i][j];
+                                System.out.print(matrix[i][j] + " ");
+                                sum += matrix[i][j];
+                            } else {
+                                System.out.print("  ");
                             }
                         }
+                        System.out.println();
                     }
-
-                    System.out.println("\nTổng các phần tử: " + sum);
+                    System.out.println("Tổng các phần tử trên biên, đường chéo chính, đường chéo phụ: " + sum);
                     break;
 
                 case 5:
-                    for (int j = 0; j < m; j++) {
+                    for (int col = 0; col < m; col++) {
                         for (int i = 0; i < n - 1; i++) {
-                            int min = i;
-                            for (int k = i + 1; k < n; k++) {
-                                if (arr[k][j] < arr[min][j]) {
-                                    min = k;
+                            for (int j = i + 1; j < n; j++) {
+                                if (matrix[i][col] > matrix[j][col]) {
+                                    int temp = matrix[i][col];
+                                    matrix[i][col] = matrix[j][col];
+                                    matrix[j][col] = temp;
                                 }
                             }
-                            int temp = arr[i][j];
-                            arr[i][j] = arr[min][j];
-                            arr[min][j] = temp;
                         }
                     }
+                    System.out.println("Mảng sau khi sắp xếp tăng dần theo cột.");
                     break;
 
                 case 6:
-                    System.out.println("Các số nguyên tố:");
-                    for (int i = 0; i < n; i++) {
-                        for (int j = 0; j < m; j++) {
-                            boolean isPrime = true;
-                            if (arr[i][j] < 2) isPrime = false;
-                            for (int k = 2; k <= Math.sqrt(arr[i][j]); k++) {
-                                if (arr[i][j] % k == 0) {
-                                    isPrime = false;
-                                    break;
+                    System.out.println("Các số nguyên tố trong mảng:");
+                    for (int[] row : matrix) {
+                        for (int num : row) {
+                            if (num > 1) {
+                                boolean isPrime = true;
+                                for (int j = 2; j * j <= num; j++) {
+                                    if (num % j == 0) {
+                                        isPrime = false;
+                                        break;
+                                    }
+                                }
+                                if (isPrime) {
+                                    System.out.print(num + " ");
                                 }
                             }
-                            if (isPrime) System.out.print(arr[i][j] + " ");
                         }
                     }
                     System.out.println();
